@@ -39,7 +39,7 @@ const tasksRunner = (tasks, options, context) => {
             logger.note('Using Local Cache (NX_AWS_DISABLE is set to true)');
             return (0, default_1.default)(tasks, options, context);
         }
-        logger.note('Using Remote Cache');
+        logger.note('Using AWS S3 Remote Cache');
         const messages = new message_reporter_1.MessageReporter(logger);
         const remoteCache = new aws_cache_1.AwsCache(awsOptions, messages);
         const runnerWrapper = new rxjs_1.Subject();
