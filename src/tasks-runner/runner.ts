@@ -38,7 +38,7 @@ export const tasksRunner = (
       return defaultTaskRunner(tasks, options, context)
     }
 
-    logger.note('Using Remote Cache')
+    logger.note('Using AWS S3 Remote Cache')
 
     const messages = new MessageReporter(logger)
     const remoteCache = new AwsCache(awsOptions, messages)
