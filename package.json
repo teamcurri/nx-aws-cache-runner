@@ -5,9 +5,8 @@
   "license": "MIT",
   "main": "dist/index.js",
   "scripts": {
-    "vendor": "tsc",
-    "vendor:watch": "tsc --watch",
-    "vendor-comment": "Do not add a regular build script, we don't ever want this built automatically."
+    "build": "tsc",
+    "build:watch": "tsc --watch"
   },
   "files": [
     "dist"
@@ -17,13 +16,13 @@
     "@aws-sdk/client-s3": "3.198.0",
     "@aws-sdk/credential-providers": "3.198.0",
     "@aws-sdk/property-provider": "3.198.0",
+    "@nrwl/workspace": "15.0.4",
     "chalk": "2.4.2",
     "dotenv": "16.0.3",
     "rxjs": "6.6.3",
     "tar": "6.1.11"
   },
   "devDependencies": {
-    "@nrwl/workspace": "15.0.4",
     "@types/tar": "6.1.1",
     "typescript": "4.7.4"
   }
