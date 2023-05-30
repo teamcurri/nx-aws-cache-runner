@@ -1,6 +1,6 @@
 /* eslint-disable sort-keys-fix/sort-keys-fix */
 
-import { output } from '@nrwl/workspace'
+import { output } from '@nx/workspace'
 import chalk from 'chalk'
 
 export class Logger {

@@ -1,6 +1,6 @@
 /* eslint-disable sort-keys-fix/sort-keys-fix */
-import { TaskStatus } from '@nrwl/workspace/src/tasks-runner/tasks-runner'
-import defaultTaskRunner from '@nrwl/workspace/tasks-runners/default'
+import { TaskStatus } from '@nx/workspace/src/tasks-runner/tasks-runner'
+import defaultTaskRunner from '@nx/workspace/tasks-runners/default'
 import { config as dotEnvConfig } from 'dotenv'
 import { from, Observable, Subject } from 'rxjs'
 

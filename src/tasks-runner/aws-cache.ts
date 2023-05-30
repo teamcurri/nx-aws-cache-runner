@@ -2,7 +2,7 @@
 import * as clientS3 from '@aws-sdk/client-s3'
 import * as AwsCredentialProviders from '@aws-sdk/credential-providers'
 import { CredentialsProviderError } from '@aws-sdk/property-provider'
-import { RemoteCache } from '@nrwl/workspace/src/tasks-runner/default-tasks-runner'
+import { RemoteCache } from '@nx/workspace/src/tasks-runner/default-tasks-runner'
 import { createReadStream, createWriteStream, writeFile } from 'fs'
 import { join } from 'path'
 import { pipeline, Readable } from 'stream'
