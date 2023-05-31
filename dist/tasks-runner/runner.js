@@ -8,14 +8,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.tasksRunner = void 0;
-const default_1 = __importDefault(require("@nrwl/workspace/tasks-runners/default"));
+const devkit_1 = require("@nx/devkit");
 const dotenv_1 = require("dotenv");
-const rxjs_1 = require("rxjs");
 const aws_cache_1 = require("./aws-cache");
 const logger_1 = require("./logger");
 const message_reporter_1 = require("./message-reporter");
@@ -37,34 +33,22 @@ const tasksRunner = (tasks, options, context) => {
     try {
         if (process.env.NX_AWS_DISABLE === 'true') {
             logger.note('Using Local Cache (NX_AWS_DISABLE is set to true)');
-            return (0, default_1.default)(tasks, options, context);
+            return (0, devkit_1.defaultTasksRunner)(tasks, options, context);
         }
         logger.note('Using AWS S3 Remote Cache');
         const messages = new message_reporter_1.MessageReporter(logger);
         const remoteCache = new aws_cache_1.AwsCache(awsOptions, messages);
-        const runnerWrapper = new rxjs_1.Subject();
-        const runner = (0, default_1.default)(tasks, Object.assign(Object.assign({}, options), { remoteCache }), context);
-        (0, rxjs_1.from)(runner).subscribe({
-            next(value) {
-                return runnerWrapper.next(value);
-            },
-            error(err) {
-                return runnerWrapper.error(err);
-            },
-            complete() {
-                return __awaiter(this, void 0, void 0, function* () {
-                    yield remoteCache.waitForStoreRequestsToComplete();
-                    messages.printMessages();
-                    runnerWrapper.complete();
-                });
-            },
-        });
-        return runnerWrapper.toPromise();
+        const runner = (0, devkit_1.defaultTasksRunner)(tasks, Object.assign(Object.assign({}, options), { remoteCache }), context);
+        runner.finally(() => __awaiter(void 0, void 0, void 0, function* () {
+            yield remoteCache.waitForStoreRequestsToComplete();
+            messages.printMessages();
+        }));
+        return runner;
     }
     catch (err) {
         logger.warn(err.message);
         logger.note('Using Local Cache');
-        return (0, default_1.default)(tasks, options, context);
+        return (0, devkit_1.defaultTasksRunner)(tasks, options, context);
     }
 };
 exports.tasksRunner = tasksRunner;

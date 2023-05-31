@@ -1,4 +1,4 @@
-import { RemoteCache } from '@nrwl/workspace/src/tasks-runner/default-tasks-runner';
+import { RemoteCache } from '@nx/workspace/src/tasks-runner/default-tasks-runner';
 import { MessageReporter } from './message-reporter';
 export interface AwsNxCacheOptions {
     awsProfile?: string;
